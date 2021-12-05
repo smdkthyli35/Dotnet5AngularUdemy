@@ -29,8 +29,8 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            //services.AddSingleton<IProductDal, EfProductDal>();
             services.AddControllers();
+            services.AddSingleton<IProductDal, EfProductDal>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });

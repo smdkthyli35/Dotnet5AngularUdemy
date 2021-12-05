@@ -11,5 +11,7 @@ namespace DataAccess.Abstract
     {
         Task<Product> GetProductByIdAsync(int id);
         Task<IReadOnlyList<Product>> GetProductAsync();
+        Task<IReadOnlyList<ProductType>> GetProductTypesAsync(); 
+        Task<IReadOnlyList<ProductBrand>> GetProductBrandAsync(); 
     }
 }
