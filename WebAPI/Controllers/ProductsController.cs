@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
             _productDal = productDal;
         }
 
-        [HttpGet]
+        [HttpGet("getall")]
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
             var data = await _productDal.GetProductAsync();
