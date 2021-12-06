@@ -16,10 +16,14 @@ namespace WebAPI.Controllers
     public class ProductsController : ControllerBase
     {
         IProductService _productService;
+        IProductBrandService _productBrandService;
+        IProductTypeService _productTypeService;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductService productService, IProductBrandService productBrandService, IProductTypeService productTypeService)
         {
             _productService = productService;
+            _productBrandService = productBrandService;
+            _productTypeService = productTypeService;
         }
 
         [HttpGet("getall")]
@@ -38,13 +42,13 @@ namespace WebAPI.Controllers
         [HttpGet("brands")]
         public ActionResult<List<ProductBrand>> GetBrands()
         {
-            return Ok(_productService.GetAll());
+            return Ok(_productBrandService.GetAll());
         }
 
         [HttpGet("types")]
         public ActionResult<List<ProductBrand>> GetTypes()
         {
-            return Ok(_productService.GetAll());
+            return Ok(_productTypeService.GetAll());
         }
 
     }

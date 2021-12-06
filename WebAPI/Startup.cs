@@ -38,6 +38,12 @@ namespace WebAPI
             services.AddSingleton<IProductService, ProductManager>();
             services.AddSingleton<IProductDal, EfProductDal>();
 
+            services.AddSingleton<IProductBrandService, ProductBrandManager>();
+            services.AddSingleton<IProductBrandDal, EfProductBrandDal>();
+
+            services.AddSingleton<IProductTypeService, ProductTypeManager>();
+            services.AddSingleton<IProductTypeDal, EfProductTypeDal>();
+
 
 
             //services.AddScoped(typeof(IEntityRepository<>), (typeof(EfEntityRepositoryBase<,>)));
