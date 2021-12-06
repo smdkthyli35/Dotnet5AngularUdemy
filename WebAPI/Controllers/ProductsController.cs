@@ -1,4 +1,5 @@
-﻿using Core.DataAccess;
+﻿using Business.Abstract;
+using Core.DataAccess;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
@@ -14,50 +15,37 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        //IProductDal _productDal;
+        IProductService _productService;
 
-        //public ProductsController(IProductDal productDal)
-        //{
-        //    _productDal = productDal;
-        //}
-
-        private readonly IEntityRepository<Product> _productRepository;
-        private readonly IEntityRepository<ProductBrand> _productBrandRepository;
-        private readonly IEntityRepository<ProductType> _productTypeRepository;
-
-        public ProductsController(IEntityRepository<Product> productRepository, IEntityRepository<ProductBrand> productBrandRepository, IEntityRepository<ProductType> productTypeRepository)
+        public ProductsController(IProductService productService)
         {
-            _productRepository = productRepository;
-            _productBrandRepository = productBrandRepository;
-            _productTypeRepository = productTypeRepository;
+            _productService = productService;
         }
 
+        [HttpGet("getall")]
+        public ActionResult<List<Product>> GetProducts()
+        {
+            var data = _productService.GetProductDetails();
+            return Ok(data);
+        }
 
+        [HttpGet("{id}")]
+        public ActionResult<Product> GetProduct(int id)
+        {
+            return _productService.GetById(id);
+        }
 
-        //[HttpGet("getall")]
-        //public async Task<ActionResult<List<Product>>> GetProducts()
-        //{
-        //    var data = await _productRepository.ListAllAsync();
-        //    return Ok(data);
-        //}
+        [HttpGet("brands")]
+        public ActionResult<List<ProductBrand>> GetBrands()
+        {
+            return Ok(_productService.GetAll());
+        }
 
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Product>> GetProduct(int id)
-        //{
-        //    return await _productRepository.GetByIdAsync(id);
-        //}
-
-        //[HttpGet("brands")]
-        //public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetBrands()
-        //{
-        //    return Ok(await _productBrandRepository.ListAllAsync());
-        //}
-
-        //[HttpGet("types")]
-        //public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetTypes()
-        //{
-        //    return Ok(await _productTypeRepository.ListAllAsync());
-        //}
+        [HttpGet("types")]
+        public ActionResult<List<ProductBrand>> GetTypes()
+        {
+            return Ok(_productService.GetAll());
+        }
 
     }
 }

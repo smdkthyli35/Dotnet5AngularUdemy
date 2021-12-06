@@ -1,3 +1,5 @@
+using Business.Abstract;
+using Business.Concrete;
 using Core.DataAccess;
 using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
@@ -32,7 +34,12 @@ namespace WebAPI
         {
 
             services.AddControllers();
-            services.AddScoped<IProductDal, EfProductDal>();
+
+            services.AddSingleton<IProductService, ProductManager>();
+            services.AddSingleton<IProductDal, EfProductDal>();
+
+
+
             //services.AddScoped(typeof(IEntityRepository<>), (typeof(EfEntityRepositoryBase<,>)));
             services.AddSwaggerGen(c =>
             {
