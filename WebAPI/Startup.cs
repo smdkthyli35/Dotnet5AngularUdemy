@@ -1,3 +1,5 @@
+using Core.DataAccess;
+using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Builder;
@@ -30,7 +32,8 @@ namespace WebAPI
         {
 
             services.AddControllers();
-            services.AddSingleton<IProductDal, EfProductDal>();
+            services.AddScoped<IProductDal, EfProductDal>();
+            //services.AddScoped(typeof(IEntityRepository<>), (typeof(EfEntityRepositoryBase<,>)));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });

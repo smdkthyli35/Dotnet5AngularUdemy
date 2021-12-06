@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.DataAccess;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface IProductDal
+    public interface IProductDal : IEntityRepository<Product>
     {
-        Task<Product> GetProductByIdAsync(int id);
-        Task<IReadOnlyList<Product>> GetProductAsync();
-        Task<IReadOnlyList<ProductType>> GetProductTypesAsync(); 
-        Task<IReadOnlyList<ProductBrand>> GetProductBrandAsync(); 
     }
 }
