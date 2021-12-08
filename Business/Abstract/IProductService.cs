@@ -22,6 +22,5 @@ namespace Business.Abstract
         List<ProductDetailDto> GetProductDetailsByBrandName(string brandName);
         List<ProductDetailDto> GetProductDetailsByTypeName(string typeName);
         List<ProductDetailDto> GetProductDetailsByBrandNameAndTypeName(string brandName, string typeName);
-
     }
 }
