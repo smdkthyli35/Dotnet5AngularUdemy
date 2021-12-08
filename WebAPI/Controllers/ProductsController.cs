@@ -2,6 +2,7 @@
 using Core.DataAccess;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,14 +30,64 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public ActionResult<List<Product>> GetProducts()
         {
-            var data = _productService.GetProductDetails();
-            return Ok(data);
+            var result = _productService.GetAll();
+            return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("getproductdetails")]
+        public ActionResult<List<Product>> GetProductDetails()
+        {
+            var result = _productService.GetProductDetails();
+            return Ok(result);
+        }
+
+        [HttpGet("getbyid")]
         public ActionResult<Product> GetProduct(int id)
         {
             return _productService.GetById(id);
+        }
+
+        [HttpGet("getproductdetailsbyid")]
+        public ActionResult<List<Product>> GetProductDetailsById(int id)
+        {
+            var result = _productService.GetProductDetails(p => p.ProductId == id);
+            return Ok(result);
+        }
+
+        [HttpGet("getproductsbybrandid")]
+        public ActionResult<List<ProductDetailDto>> GetProductsByBrandId(int id)
+        {
+            var result = _productService.GetProductsByBrandId(id);
+            return Ok(result);
+        }
+
+        [HttpGet("getproductsbytypeid")]
+        public ActionResult<List<Product>> GetProductsByTypeId(int id)
+        {
+            var result = _productService.GetProductsByTypeId(id);
+            return Ok(result);
+        }
+
+
+        [HttpGet("getproductdetailsbybrandname")]
+        public ActionResult<List<Product>> GetProductDetailsByBrandName(string name)
+        {
+            var result = _productService.GetProductDetailsByBrandName(name);
+            return Ok(result);
+        }
+
+        [HttpGet("getproductdetailsbytypename")]
+        public ActionResult<List<Product>> GetProductDetailsByTypeName(string name)
+        {
+            var result = _productService.GetProductDetailsByTypeName(name);
+            return Ok(result);
+        }
+
+        [HttpGet("getproductdetailsbybrandnameandtypename")]
+        public ActionResult<List<Product>> GetProductDetailsByBrandNameAndTypeName(string brandName, string typeName)
+        {
+            var result = _productService.GetProductDetailsByBrandNameAndTypeName(brandName, typeName);
+            return Ok(result);
         }
 
         [HttpGet("brands")]
@@ -50,6 +101,5 @@ namespace WebAPI.Controllers
         {
             return Ok(_productTypeService.GetAll());
         }
-
     }
 }

@@ -5,6 +5,7 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,14 +40,39 @@ namespace Business.Concrete
             return _productDal.Get(p => p.ProductId == id);
         }
 
-        public List<ProductDetailDto> GetProductDetails()
+        public List<ProductDetailDto> GetProductsByBrandId(int brandId)
         {
-            return _productDal.GetProductDetails();
+            return _productDal.GetProductDetails(p => p.ProductBrandId == brandId);
+        }
+
+        public List<ProductDetailDto> GetProductsByTypeId(int typeId)
+        {
+            return _productDal.GetProductDetails(p => p.ProductTypeId == typeId);
+        }
+
+        public List<ProductDetailDto> GetProductDetails(Expression<Func<Product, bool>> filter = null)
+        {
+            return _productDal.GetProductDetails(filter);
+        }
+
+        public List<ProductDetailDto> GetProductDetailsByBrandName(string brandName)
+        {
+            return _productDal.GetProductDetails(p => p.ProductBrand.Name == brandName);
+        }
+
+        public List<ProductDetailDto> GetProductDetailsByTypeName(string typeName)
+        {
+            return _productDal.GetProductDetails(p => p.ProductType.Name == typeName);
         }
 
         public void Update(Product product)
         {
             _productDal.Update(product);
+        }
+
+        public List<ProductDetailDto> GetProductDetailsByBrandNameAndTypeName(string brandName, string typeName)
+        {
+            return _productDal.GetProductDetails(p => p.ProductBrand.Name == brandName && p.ProductType.Name == typeName);
         }
     }
 }
