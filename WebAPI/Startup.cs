@@ -36,14 +36,14 @@ namespace WebAPI
 
             services.AddControllers();
 
-            services.AddSingleton<IProductService, ProductManager>();
-            services.AddSingleton<IProductDal, EfProductDal>();
+            //services.AddSingleton<IProductService, ProductManager>();
+            //services.AddSingleton<IProductDal, EfProductDal>();
 
-            services.AddSingleton<IProductBrandService, ProductBrandManager>();
-            services.AddSingleton<IProductBrandDal, EfProductBrandDal>();
+            //services.AddSingleton<IProductBrandService, ProductBrandManager>();
+            //services.AddSingleton<IProductBrandDal, EfProductBrandDal>();
 
-            services.AddSingleton<IProductTypeService, ProductTypeManager>();
-            services.AddSingleton<IProductTypeDal, EfProductTypeDal>();
+            //services.AddSingleton<IProductTypeService, ProductTypeManager>();
+            //services.AddSingleton<IProductTypeDal, EfProductTypeDal>();
 
             services.AddAutoMapper(typeof(MappingProfiles));
 
