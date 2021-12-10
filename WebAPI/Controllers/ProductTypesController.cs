@@ -27,6 +27,49 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet("getbyid")]
+        public IActionResult GetProductType(int id)
+        {
+            var result = _productTypeService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add(ProductType productType)
+        {
+            var result = _productTypeService.Add(productType);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("delete")]
+        public IActionResult Delete(ProductType productType)
+        {
+            var result = _productTypeService.Delete(productType);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("update")]
+        public IActionResult Update(ProductType productType)
+        {
+            var result = _productTypeService.Update(productType);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
     }
 }

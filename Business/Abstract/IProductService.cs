@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -11,16 +12,16 @@ namespace Business.Abstract
 {
     public interface IProductService
     {
-        List<Product> GetAll();
-        Product GetById(int id);
-        void Add(Product product);
-        void Delete(Product product);
-        void Update(Product product);
-        List<ProductDetailDto> GetProductDetails(Expression<Func<Product, bool>> filter = null);
-        List<ProductDetailDto> GetProductsByBrandId(int brandId);
-        List<ProductDetailDto> GetProductsByTypeId(int typeId);
-        List<ProductDetailDto> GetProductDetailsByBrandName(string brandName);
-        List<ProductDetailDto> GetProductDetailsByTypeName(string typeName);
-        List<ProductDetailDto> GetProductDetailsByBrandNameAndTypeName(string brandName, string typeName);
+        IDataResult<List<Product>> GetAll();
+        IDataResult<Product> GetById(int id);
+        IResult Add(Product product);
+        IResult Delete(Product product);
+        IResult Update(Product product);
+        IDataResult<List<ProductDetailDto>> GetProductDetails(Expression<Func<Product, bool>> filter = null);
+        IDataResult<List<ProductDetailDto>> GetProductsByBrandId(int brandId);
+        IDataResult<List<ProductDetailDto>> GetProductsByTypeId(int typeId);
+        IDataResult<List<ProductDetailDto>> GetProductDetailsByBrandName(string brandName);
+        IDataResult<List<ProductDetailDto>> GetProductDetailsByTypeName(string typeName);
+        IDataResult<List<ProductDetailDto>> GetProductDetailsByBrandNameAndTypeName(string brandName, string typeName);
     }
 }

@@ -29,44 +29,66 @@ namespace WebAPI.Controllers
         public IActionResult GetProducts()
         {
             var result = _productService.GetAll();
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest();
         }
 
         [HttpGet("getproductdetails")]
         public IActionResult GetProductDetails()
         {
             var result = _productService.GetProductDetails();
-            //return Ok(_mapper.Map<List<Product>, List<ProductDetailDto>>(result));
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpGet("getbyid")]
-        public ActionResult<ProductDetailDto> GetProduct(int id)
+        public IActionResult GetProduct(int id)
         {
             var result = _productService.GetById(id);
-            return _mapper.Map<Product, ProductDetailDto>(result);
-            //return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpGet("getproductdetailsbyid")]
         public IActionResult GetProductDetailsById(int id)
         {
             var result = _productService.GetProductDetails(p => p.ProductId == id);
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpGet("getproductsbybrandid")]
         public IActionResult GetProductsByBrandId(int id)
         {
             var result = _productService.GetProductsByBrandId(id);
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpGet("getproductsbytypeid")]
         public IActionResult GetProductsByTypeId(int id)
         {
             var result = _productService.GetProductsByTypeId(id);
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
 
@@ -74,21 +96,66 @@ namespace WebAPI.Controllers
         public IActionResult GetProductDetailsByBrandName(string name)
         {
             var result = _productService.GetProductDetailsByBrandName(name);
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpGet("getproductdetailsbytypename")]
         public IActionResult GetProductDetailsByTypeName(string name)
         {
             var result = _productService.GetProductDetailsByTypeName(name);
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpGet("getproductdetailsbybrandnameandtypename")]
         public IActionResult GetProductDetailsByBrandNameAndTypeName(string brandName, string typeName)
         {
             var result = _productService.GetProductDetailsByBrandNameAndTypeName(brandName, typeName);
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add(Product product)
+        {
+            var result = _productService.Add(product);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("delete")]
+        public IActionResult Delete(Product product)
+        {
+            var result = _productService.Delete(product);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("update")]
+        public IActionResult Update(Product product)
+        {
+            var result = _productService.Update(product);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }

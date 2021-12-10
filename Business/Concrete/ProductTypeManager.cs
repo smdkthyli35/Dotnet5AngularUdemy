@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -18,29 +20,32 @@ namespace Business.Concrete
             _productTypeDal = productTypeDal;
         }
 
-        public void Add(ProductType productType)
+        public IResult Add(ProductType productType)
         {
             _productTypeDal.Add(productType);
+            return new SuccessResult(Messages.TypeAdded);
         }
 
-        public void Delete(ProductType productType)
+        public IResult Delete(ProductType productType)
         {
             _productTypeDal.Delete(productType);
+            return new SuccessResult(Messages.TypeDeleted); 
         }
 
-        public List<ProductType> GetAll()
+        public IDataResult<List<ProductType>> GetAll()
         {
-            return _productTypeDal.GetList();
+            return new SuccessDataResult<List<ProductType>>(_productTypeDal.GetList(),Messages.TypeListed);
         }
 
-        public ProductType GetById(int id)
+        public IDataResult<ProductType> GetById(int id)
         {
-            return _productTypeDal.Get(p => p.ProductTypeId == id);
+            return new SuccessDataResult<ProductType>(_productTypeDal.Get(p => p.ProductTypeId == id));
         }
 
-        public void Update(ProductType productType)
+        public IResult Update(ProductType productType)
         {
             _productTypeDal.Update(productType);
+            return new SuccessResult(Messages.TypeUpdated);
         }
     }
 }

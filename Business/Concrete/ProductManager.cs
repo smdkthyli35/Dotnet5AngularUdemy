@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -20,59 +22,62 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
-        public void Add(Product product)
+        public IResult Add(Product product)
         {
             _productDal.Add(product);
+            return new SuccessResult(Messages.ProductAdded);
         }
 
-        public void Delete(Product product)
+        public IResult Delete(Product product)
         {
             _productDal.Delete(product);
+            return new SuccessResult(Messages.ProductDeleted);
         }
 
-        public List<Product> GetAll()
+        public IDataResult<List<Product>> GetAll()
         {
-            return _productDal.GetList();
+            return new SuccessDataResult<List<Product>>(_productDal.GetList(), Messages.ProductListed);
         }
 
-        public Product GetById(int id)
+        public IDataResult<Product> GetById(int id)
         {
-            return _productDal.Get(p => p.ProductId == id);
+            return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == id));
         }
 
-        public List<ProductDetailDto> GetProductsByBrandId(int brandId)
+        public IDataResult<List<ProductDetailDto>> GetProductsByBrandId(int brandId)
         {
-            return _productDal.GetProductDetails(p => p.ProductBrandId == brandId);
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.ProductBrandId == brandId));
         }
 
-        public List<ProductDetailDto> GetProductsByTypeId(int typeId)
+        public IDataResult<List<ProductDetailDto>> GetProductsByTypeId(int typeId)
         {
-            return _productDal.GetProductDetails(p => p.ProductTypeId == typeId);
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.ProductTypeId == typeId));
         }
 
-        public List<ProductDetailDto> GetProductDetails(Expression<Func<Product, bool>> filter = null)
+        public IDataResult<List<ProductDetailDto>> GetProductDetails(Expression<Func<Product, bool>> filter = null)
         {
-            return _productDal.GetProductDetails(filter);
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(filter), Messages.ProductListed);
         }
 
-        public List<ProductDetailDto> GetProductDetailsByBrandName(string brandName)
+        public IDataResult<List<ProductDetailDto>> GetProductDetailsByBrandName(string brandName)
         {
-            return _productDal.GetProductDetails(p => p.ProductBrand.Name == brandName);
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.ProductBrand.Name == brandName));
         }
 
-        public List<ProductDetailDto> GetProductDetailsByTypeName(string typeName)
+        public IDataResult<List<ProductDetailDto>> GetProductDetailsByTypeName(string typeName)
         {
-            return _productDal.GetProductDetails(p => p.ProductType.Name == typeName);
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.ProductType.Name == typeName));
         }
 
-        public void Update(Product product)
+        public IResult Update(Product product)
         {
             _productDal.Update(product);
+            return new SuccessResult(Messages.ProductUpdated);
         }
 
-        public List<ProductDetailDto> GetProductDetailsByBrandNameAndTypeName(string brandName, string typeName)
+        public IDataResult<List<ProductDetailDto>> GetProductDetailsByBrandNameAndTypeName(string brandName, string typeName)
         {
-            return _productDal.GetProductDetails(p => p.ProductBrand.Name == brandName && p.ProductType.Name == typeName);
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.ProductBrand.Name == brandName && p.ProductType.Name == typeName));
         }
     }
 }
