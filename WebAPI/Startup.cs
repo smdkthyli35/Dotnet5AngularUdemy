@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPI.Helpers;
 
 namespace WebAPI
 {
@@ -44,7 +45,7 @@ namespace WebAPI
             services.AddSingleton<IProductTypeService, ProductTypeManager>();
             services.AddSingleton<IProductTypeDal, EfProductTypeDal>();
 
-
+            services.AddAutoMapper(typeof(MappingProfiles));
 
             //services.AddScoped(typeof(IEntityRepository<>), (typeof(EfEntityRepositoryBase<,>)));
             services.AddSwaggerGen(c =>

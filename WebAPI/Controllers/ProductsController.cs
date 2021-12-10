@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿using AutoMapper;
+using Business.Abstract;
 using Core.DataAccess;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -17,10 +18,11 @@ namespace WebAPI.Controllers
     public class ProductsController : ControllerBase
     {
         IProductService _productService;
-
-        public ProductsController(IProductService productService)
+        IMapper _mapper;
+        public ProductsController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
+            _mapper = mapper;
         }
 
         [HttpGet("getall")]
@@ -34,14 +36,16 @@ namespace WebAPI.Controllers
         public IActionResult GetProductDetails()
         {
             var result = _productService.GetProductDetails();
+            //return Ok(_mapper.Map<List<Product>, List<ProductDetailDto>>(result));
             return Ok(result);
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetProduct(int id)
+        public ActionResult<ProductDetailDto> GetProduct(int id)
         {
             var result = _productService.GetById(id);
-            return Ok(result);
+            return _mapper.Map<Product, ProductDetailDto>(result);
+            //return Ok(result);
         }
 
         [HttpGet("getproductdetailsbyid")]
