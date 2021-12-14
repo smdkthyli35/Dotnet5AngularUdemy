@@ -157,5 +157,11 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet]
+        public IActionResult Deneme()
+        {
+            return Ok();
+        }
     }
 }
