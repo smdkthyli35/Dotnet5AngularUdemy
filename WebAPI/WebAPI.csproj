@@ -18,4 +18,15 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\images\products\1.jpg" />
+    <None Include="wwwroot\images\products\2.png" />
+    <None Include="wwwroot\images\products\3.jpg" />
+    <None Include="wwwroot\images\products\4.png" />
+    <None Include="wwwroot\images\products\5.jpg" />
+    <None Include="wwwroot\images\products\6.jpg" />
+    <None Include="wwwroot\images\products\7.jpg" />
+    <None Include="wwwroot\images\products\8.jpg" />
+  </ItemGroup>
+
 </Project>
