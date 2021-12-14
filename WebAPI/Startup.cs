@@ -47,6 +47,14 @@ namespace WebAPI
 
             services.AddAutoMapper(typeof(MappingProfiles));
 
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                 {
+                     policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
+                 });
+            });
+
             //services.AddScoped(typeof(IEntityRepository<>), (typeof(EfEntityRepositoryBase<,>)));
             services.AddSwaggerGen(c =>
             {
@@ -67,6 +75,8 @@ namespace WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 
