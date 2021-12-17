@@ -20,7 +20,7 @@ namespace Business.Concrete
 
         public bool DeleteBasket(string basketId)
         {
-            return _basketDal.DeleteBasket(basketId);
+           return _basketDal.DeleteBasket(basketId);
         }
 
         public CustomerBasket GetBasket(string basketId)
