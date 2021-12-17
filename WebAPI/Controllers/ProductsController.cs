@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getproductdetailsbyid")]
+        [HttpGet("getproductdetailsid")]
         public IActionResult GetProductDetailsById(int id)
         {
             var result = _productService.GetProductDetails(p => p.ProductId == id);

@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,14 +37,10 @@ namespace WebAPI
 
             services.AddControllers();
 
-            //services.AddSingleton<IProductService, ProductManager>();
-            //services.AddSingleton<IProductDal, EfProductDal>();
-
-            //services.AddSingleton<IProductBrandService, ProductBrandManager>();
-            //services.AddSingleton<IProductBrandDal, EfProductBrandDal>();
-
-            //services.AddSingleton<IProductTypeService, ProductTypeManager>();
-            //services.AddSingleton<IProductTypeDal, EfProductTypeDal>();
+            services.AddSingleton<ConnectionMultiplexer>(x=>{
+                var configuration = ConfigurationOptions.Parse(Configuration.GetConnectionString("Redis"), true);
+                return ConnectionMultiplexer.Connect(configuration);
+            });
 
             services.AddAutoMapper(typeof(MappingProfiles));
 
