@@ -21,9 +21,11 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<ProductBrandManager>().As<IProductBrandService>().SingleInstance();
             builder.RegisterType<EfProductBrandDal>().As<IProductBrandDal>().SingleInstance();
 
-
             builder.RegisterType<ProductTypeManager>().As<IProductTypeService>().SingleInstance();
             builder.RegisterType<EfProductTypeDal>().As<IProductTypeDal>().SingleInstance();
+
+            builder.RegisterType<BasketManager>().As<IBasketService>().SingleInstance();
+            builder.RegisterType<EfBasketDal>().As<IBasketDal>().SingleInstance();
 
         }
     }
