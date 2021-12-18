@@ -44,7 +44,7 @@ namespace WebAPI
             });
 
 
-            services.AddIdentityServices();
+            services.AddIdentityServices(Configuration);
 
             services.AddAutoMapper(typeof(MappingProfiles));
 
@@ -81,6 +81,8 @@ namespace WebAPI
             app.UseRouting();
 
             app.UseCors("CorsPolicy");
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
