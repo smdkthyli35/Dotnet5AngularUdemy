@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Entities.Concrete;
+using Entities.Concrete.Identity;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace WebAPI.Helpers
             CreateMap<Product, ProductDetailDto>()
                     .ForMember(x => x.ProductBrandName, o => o.MapFrom(s => s.ProductBrand.Name))
                     .ForMember(x => x.ProductTypeName, o => o.MapFrom(s => s.ProductType.Name));
+
+            CreateMap<Address, AddressDto>().ReverseMap();
         }
     }
 }
