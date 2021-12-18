@@ -43,5 +43,27 @@ namespace WebAPI.Controllers
                 DisplayName = user.DisplayName
             };
         }
+
+        [HttpPost("register")]
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+        {
+            var user = new AppUser
+            {
+                DisplayName = registerDto.DisplayName,
+                Email = registerDto.Email,
+                UserName = registerDto.Email
+            };
+            var result = await _userManager.CreateAsync(user, registerDto.Password);
+            if (result.Succeeded)
+            {
+                return BadRequest();
+            }
+            return new UserDto
+            {
+                DisplayName = user.DisplayName,
+                Token = "Token değeri alındı!",
+                Email = user.Email
+            };
+        }
     }
 }
