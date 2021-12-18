@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPI.Extensions;
 using WebAPI.Helpers;
 
 namespace WebAPI
@@ -41,6 +42,9 @@ namespace WebAPI
                 var configuration = ConfigurationOptions.Parse(Configuration.GetConnectionString("Redis"), true);
                 return ConnectionMultiplexer.Connect(configuration);
             });
+
+
+            services.AddIdentityServices();
 
             services.AddAutoMapper(typeof(MappingProfiles));
 
