@@ -27,6 +27,7 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<BasketManager>().As<IBasketService>().SingleInstance();
             builder.RegisterType<EfBasketDal>().As<IBasketDal>().SingleInstance();
 
+            builder.RegisterType<TokenManager>().As<ITokenService>().SingleInstance();
         }
     }
 }
