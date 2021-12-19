@@ -9,6 +9,11 @@ namespace Entities.Concrete.OrderAggregate
 {
     public class Order : IEntity
     {
+        public Order()
+        {
+
+        }
+
         public Order(int orderId, string buyerMail, Address shipToAddress, DeliveryMethod deliveryMethod, IReadOnlyList<OrderItem> orderItems, decimal subTotal)
         {
             OrderId = orderId;

@@ -22,7 +22,7 @@ namespace Entities.Concrete.OrderAggregate
             State = state;
             ZipCode = zipCode;
         }
-
+        public int AddressId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Street { get; set; }

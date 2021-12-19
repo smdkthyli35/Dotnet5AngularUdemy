@@ -9,6 +9,7 @@ namespace Entities.Concrete.OrderAggregate
 {
     public class DeliveryMethod : IEntity
     {
+        public int DeliveryMethodId { get; set; }
         public string ShortName { get; set; }
         public string DeliveryTime { get; set; }
         public string Description { get; set; }
