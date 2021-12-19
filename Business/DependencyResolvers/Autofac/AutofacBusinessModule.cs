@@ -28,6 +28,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfBasketDal>().As<IBasketDal>().SingleInstance();
 
             builder.RegisterType<TokenManager>().As<ITokenService>().SingleInstance();
+
+            builder.RegisterType<OrderManager>().As<IOrderService>().SingleInstance();
         }
     }
 }
